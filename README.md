@@ -1,5 +1,15 @@
 # Hybrid Enterprise Infrastructure & Cloud Architecture
 
+#### Network Architecture #####
+
+![Architecture](/Data%20Center/Network_Architecture.png)
+
+#### AWS Cloud Architecture #####
+
+![Architecture](/AWS%20Cloud%20(DR)/CLoud_Architeture.png)
+
+
+
  📌 Project Overview
  This repository features the design and implementation of a highly secure, scalable, and resilient Hybrid Cloud Infrastructure. The project seamlessly bridges an enterprise On-Premises environment—simulating core networking devices, robust firewall perimeter defenses, and essential centralized corporate services—with a modern, automated public cloud environment on AWS, fully provisioned through Infrastructure as Code (IaC) using Terraform.
 
