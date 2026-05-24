@@ -1,4 +1,8 @@
 # NHN-Hotel-System_and_Disaster-Recovery_From_AWS-Cloud
+
+![Architecture](CLoud_Architeture.png)
+
+
 Using Terraform to modernize a monolithic LEMP stack application that was locally deployed into a scalable and high availability architecture on AWS
 
 Cloud Infrastructure & Automation (IaC)
