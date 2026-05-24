@@ -1,0 +1,26 @@
+/* Our Story Section */
+.our-story-section {
+    background: var(--body-bg);
+}
+
+.story-image-wrapper {
+    position: relative;
+}
+
+.story-image {
+    object-fit: cover;
+    height: 50rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .story-image {
+        height: 40rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .story-image {
+        height: 30rem;
+    }
+}

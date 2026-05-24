@@ -1,0 +1,14 @@
+/* Custom Navbar Styles */
+.navbar-custom {
+    background: var(--primary-color) !important;
+    box-shadow: var(--shadow-md);
+    padding: 1.2rem 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 767px) {
+    .navbar-collapse {
+        background: var(--primary-color);
+        border-radius: 0.8rem;
+    }
+}

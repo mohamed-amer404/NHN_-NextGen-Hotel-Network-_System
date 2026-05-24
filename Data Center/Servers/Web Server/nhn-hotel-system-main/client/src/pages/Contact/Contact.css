@@ -1,0 +1,54 @@
+.contact-page {
+    min-height: 80vh;
+    background: var(--body-bg);
+}
+
+.contact-hero h1 {
+    color: var(--primary-color);
+    font-size: 3.4rem;
+    margin-bottom: 1rem;
+}
+
+.contact-hero p {
+    color: var(--text-secondary);
+    font-size: 1.7rem;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.contact-info-card,
+.contact-map-card {
+    background: var(--container-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-sm);
+    padding: 2rem;
+}
+
+.contact-info-card h3,
+.contact-map-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.contact-info-card p {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+}
+
+.contact-map {
+    width: 100%;
+    min-height: 380px;
+    border: 0;
+    border-radius: 1rem;
+}
+
+@media (max-width: 576px) {
+    .contact-hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .contact-hero p {
+        font-size: 1.5rem;
+    }
+}

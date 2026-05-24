@@ -1,0 +1,28 @@
+/* Why Choose Section */
+.why-choose-section {
+    background: var(--body-bg);
+}
+
+.feature-card {
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-0.5rem);
+}
+
+.feature-number {
+    font-size: 4rem;
+    color: var(--secondary-color);
+    opacity: 0.3;
+}
+
+.feature-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.feature-text {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+}

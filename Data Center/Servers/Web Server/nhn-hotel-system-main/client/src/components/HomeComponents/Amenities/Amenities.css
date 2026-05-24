@@ -1,0 +1,35 @@
+/* Amenities Section */
+.amenities-section {
+    background: var(--primary-color);
+}
+
+.amenities-subtitle {
+    font-size: 1.4rem;
+    letter-spacing: 0.3rem;
+    color: var(--secondary-color);
+}
+
+.amenities-title {
+    font-size: 3.6rem;
+}
+
+.amenity-card {
+    transition: transform 0.3s ease;
+}
+
+.amenity-card:hover {
+    transform: translateY(-0.8rem);
+}
+
+.amenity-icon {
+    font-size: 5rem;
+    color: var(--secondary-color);
+}
+
+.amenity-title {
+    font-size: 2rem;
+}
+
+.amenity-description {
+    font-size: 1.4rem;
+}

@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
+
+:root {
+    /* Primary Colors */
+    --primary-color: #0A182E;
+    /* Navy Blue - Main brand color */
+    --primary-light: #1a2d4a;
+    /* Lighter navy for hover states */
+    --primary-dark: #050c17;
+    /* Darker navy */
+
+    --secondary-color: #C5A059;
+    /* Gold - Accent color */
+    --secondary-light: #d4b576;
+    /* Lighter gold for hover */
+    --secondary-dark: #a68640;
+    /* Darker gold */
+
+    /* Background Colors */
+    --body-bg: #F6F7F8;
+    /* Light gray background */
+    --container-bg: #FFFFFF;
+    /* White for cards/containers */
+    --overlay-bg: rgba(10, 24, 46, 0.8);
+    /* Dark overlay */
+
+    /* Text Colors */
+    --text-primary: #0A182E;
+    /* Main text (dark navy) */
+    --text-secondary: #7D8390;
+    /* Secondary text (gray) */
+    --text-muted: #9ca3af;
+    /* Muted text */
+    --text-light: #FFFFFF;
+    /* White text */
+
+    /* Border & Dividers */
+    --border-color: #e5e7eb;
+    /* Light border */
+    --border-light: #f3f4f6;
+    /* Very light border */
+
+    /* Status Colors */
+    --success-color: #15803D;
+    /* Green for success */
+    --success-light: #E4F2DF;
+    /* Light green background */
+    --error-color: #dc2626;
+    /* Red for errors */
+    --error-light: #fecaca;
+    /* Light red background */
+    --warning-color: #FFE500;
+    /* Yellow for warnings */
+    --warning-light: #FFF7ED;
+    /* Light yellow background */
+    --info-color: #2563EB;
+    /* Blue for info */
+    --info-light: #E0E7FF;
+    /* Light blue background */
+
+    /* UI Elements */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* transition: all 0.3s ease; */
+    text-decoration: none;
+    /* font-family: "Poppins", sans-serif; */
+    font-family: "Cairo", sans-serif;
+}
+
+/* 
+:lang(ar) {
+    font-family: "Cairo", sans-serif;
+}
+     */
+
+body {
+    background-color: var(--body-bg);
+    color: var(--text-primary);
+    font-size: 1.6rem;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+
+
+@media(max-width:991px) {
+    html {
+        font-size: 55%;
+    }
+}
+
+@media(max-width:450px) {
+    html {
+        font-size: 50%;
+    }
+}

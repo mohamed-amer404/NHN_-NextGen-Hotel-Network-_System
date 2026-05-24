@@ -1,0 +1,12 @@
+/* User Icon */
+.user-icon {
+    font-size: 3.2rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-icon:hover {
+    color: var(--secondary-color);
+    transform: scale(1.1);
+}

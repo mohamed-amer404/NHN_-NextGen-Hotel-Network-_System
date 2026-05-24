@@ -1,0 +1,38 @@
+/* Navigation Links */
+.nav-link {
+    color: var(--text-light) !important;
+    font-size: 1.6rem;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.6rem 1.2rem !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0.2rem;
+    background: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+.nav-link:hover::after {
+    width: 80%;
+}
+
+/* Active Link */
+.nav-link.active {
+    color: var(--secondary-color) !important;
+}
+
+.nav-link.active::after {
+    width: 80%;
+}

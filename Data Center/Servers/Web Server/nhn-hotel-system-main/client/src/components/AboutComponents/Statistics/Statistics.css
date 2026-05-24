@@ -1,0 +1,28 @@
+/* Statistics Section */
+
+.stat-card {
+    background: white;
+    transition: all 0.3s ease;
+    border-radius: 1.2rem;
+}
+
+.stat-card:hover {
+    transform: translateY(-0.8rem);
+    box-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.12) !important;
+}
+
+.stat-icon {
+    font-size: 5rem;
+    color: var(--secondary-color);
+}
+
+.stat-number {
+    font-size: 4rem;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    font-size: 1.4rem;
+    letter-spacing: 0.1rem;
+    font-weight: 500;
+}

@@ -1,0 +1,25 @@
+/* Mission & Vision Section */
+.mission-vision-section {
+    background: var(--white);
+}
+
+.mission-card,
+.vision-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-card:hover,
+.vision-card:hover {
+    transform: translateY(-0.8rem);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.mission-card .card-title {
+    color: var(--primary-color);
+    font-size: 2.4rem;
+}
+
+.vision-card .card-title {
+    color: var(--secondary-color);
+    font-size: 2.4rem;
+}

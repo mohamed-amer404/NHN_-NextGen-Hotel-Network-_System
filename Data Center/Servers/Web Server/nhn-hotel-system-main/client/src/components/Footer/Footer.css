@@ -1,0 +1,56 @@
+.footer {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.footer-description {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+.footer-links .footer-link {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links .footer-link:hover {
+    color: var(--secondary-color);
+    padding-left: 0.5rem;
+}
+
+.footer-contact {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-contact .footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-contact .footer-link:hover {
+    color: var(--secondary-color);
+}
+
+.footer-icon {
+    font-size: 1.6rem;
+    color: var(--secondary-color);
+    flex-shrink: 0;
+}
+
+.footer-bottom {
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.1);
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.6);
+}
