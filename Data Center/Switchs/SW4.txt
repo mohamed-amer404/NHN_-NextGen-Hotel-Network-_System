@@ -1,0 +1,92 @@
+SW4
+
+
+interface e1/0
+ switchport mode access
+ switchport access vlan 70
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation protect
+ switchport port-security mac-address sticky
+ spanning-tree portfast
+ exit
+
+interface e1/1
+ switchport mode access
+ switchport access vlan 80
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation protect
+ switchport port-security mac-address sticky
+ spanning-tree portfast
+ exit
+interface e1/3
+ switchport mode access
+ switchport access vlan 90
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security violation protect
+ switchport port-security mac-address sticky
+ spanning-tree portfast
+ exit
+
+spanning-tree mode mst
+spanning-tree mst configuration
+name NHN
+revision 1
+instance 1 vlan 1-99
+instance 2 vlan 100-130
+exit
+
+interface range e0/0-1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+channel-group 13 mode active
+switchport trunk allowed vlan all 
+switchport trunk native vlan 99
+exit
+
+interface port-channel 13
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all 
+switchport trunk native vlan 99
+exit
+interface range e0/2-3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+channel-group 23 mode active
+switchport trunk allowed vlan all 
+switchport trunk native vlan 99
+exit
+
+interface port-channel 23
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan all 
+switchport trunk native vlan 99
+exit
+
+interface range e0/0-1
+spanning-tree guard loop
+exit
+interface range e0/2-3
+spanning-tree guard loop
+exit
+
+port-channel load-balance src-dst-mac
+port-channel load-balance src-dst-ip
+
+interface port-channel 13
+ip dhcp snooping trust
+ip arp inspection trust
+exit
+
+interface port-channel 23
+ip dhcp snooping trust
+ip arp inspection trust
+exit
+do wr
+
+
+

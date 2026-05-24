@@ -1,0 +1,84 @@
+enable
+configure terminal
+
+
+hostname BR-NAME
+
+service password-encryption
+
+enable secret NHN123
+banner motd #WARNING: Authorized users only!#
+banner login #Access restricted to IT staff only.#
+banner exec #Welcome to NextGen Hotel Network Switch#
+
+ip domain-name NHN.local
+
+username Abdelraheem privilege 15 secret NHN123
+username Arafa privilege 15 secret NHN123
+username Ahmed privilege 15 secret NHN123
+username Amer privilege 15 secret NHN123
+username Menna privilege 15 secret NHN123
+username Hussein privilege 15 secret NHN123
+username hashem privilege 15 secret NHN123
+username Abdullah privilege 15 secret NHN123
+username Ezzat privilege 5 secret NHN123
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 3
+
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10 0
+ login block-for 120 attempts 3 within 60
+
+
+line console 0
+login local
+password NHN123
+exec-timeout 10 0
+exit
+
+vtp domain NHN
+vtp mode transparent
+vtp password NHN123
+
+
+
+spanning-tree mode rapid-pvst
+spanning-tree portfast bpduf default
+spanning-tree extend system-id
+
+
+vlan 10
+name General Management
+vlan 20
+name Finance & Accounting
+vlan 30
+name Human Resources (HR)
+vlan 40
+name Stores
+vlan 50
+name Legal
+vlan 60
+name IT & Network
+vlan 70
+name Marketing & Sales
+vlan 80
+name Reservations
+vlan 90
+name Public Relations (PR)
+vlan 99
+name native_vlan
+vlan 100
+name Reception
+vlan 110
+name Clients
+vlan 120
+name VoIP
+vlan 130
+name DMZ
+exit
+

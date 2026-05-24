@@ -1,0 +1,172 @@
+isp-router-1 conf
+
+enable
+configure terminal
+
+
+hostname ISP-R1
+
+service password-encryption
+
+enable secret NHN123
+banner motd #WARNING: Authorized users only!#
+banner login #Access restricted to IT staff only.#
+banner exec #Welcome to NextGen Hotel Network Switch#
+
+ip domain-name NHN.local
+
+username Abdelraheem privilege 15 secret NHN123
+username Arafa privilege 15 secret NHN123
+username Ahmed privilege 15 secret NHN123
+username Amer privilege 15 secret NHN123
+username Menna privilege 15 secret NHN123
+username Hussein privilege 15 secret NHN123
+username hashem privilege 15 secret NHN123
+username Abdullah privilege 15 secret NHN123
+username Ezzat privilege 5 secret NHN123
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 3
+
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10 0
+
+exit
+
+line console 0
+login
+password NHN123
+exit
+
+
+interface e0/0
+ ip address 203.0.113.6 255.255.255.252
+ no shutdown
+exit
+
+interface e0/1
+ ip address 203.0.113.2 255.255.255.252
+ no shutdown
+exit
+
+interface Serial2/0
+ ip address 203.0.113.9 255.255.255.252
+ no shutdown
+exit
+
+interface Serial2/1
+ ip address 203.0.113.13 255.255.255.252
+ no shutdown
+exit
+
+router bgp 100
+ bgp router-id 7.7.7.7
+
+ neighbor 203.0.113.1 remote-as 100
+neighbor 203.0.113.1 route-reflector-clien
+neighbor 203.0.113.1 next-hop-self
+network 203.0.113.0 mask 255.255.255.252
+neighbor 203.0.113.1 weight 100
+neighbor 203.0.113.5 weight 200
+
+neighbor 203.0.113.5 remote-as 100
+neighbor 203.0.113.5 route-reflector-clien
+neighbor 203.0.113.5 next-hop-self
+network 203.0.113.4 mask 255.255.255.252
+
+ neighbor 203.0.113.10 remote-as 200
+ neighbor 203.0.113.10 weight 200
+ network 203.0.113.8 mask 255.255.255.252
+
+ neighbor 203.0.113.14 remote-as 300
+ neighbor 203.0.113.14 weight 100
+ network 203.0.113.12 mask 255.255.255.252
+exit
+
+service timestamps log datetime msec
+logging buffered 64000 debugging
+
+
+ip access-list extended ACL-ISP-MGMT-COPP
+ permit tcp 192.168.122.0 0.0.0.255 any eq 22
+exit
+
+ip access-list extended ACL-ISP-SNMP-COPP
+ permit udp 192.168.122.0 0.0.0.255 any eq snmp
+exit
+
+ip access-list extended ACL-ISP-ROUTING-COPP
+ permit tcp any any eq bgp
+ permit tcp any eq bgp any
+exit
+
+ip access-list extended ACL-ISP-ICMP-COPP
+ permit icmp any any
+exit
+
+class-map match-all CM-ISP-ROUTING-COPP
+ match access-group name ACL-ISP-ROUTING-COPP
+exit
+class-map match-all CM-ISP-MGMT-COPP
+ match access-group name ACL-ISP-MGMT-COPP
+exit
+class-map match-all CM-ISP-SNMP-COPP
+ match access-group name ACL-ISP-SNMP-COPP
+exit
+class-map match-all CM-ISP-ICMP-COPP
+ match access-group name ACL-ISP-ICMP-COPP
+exit
+
+policy-map PM-ISP-COPP
+ class CM-ISP-ROUTING-COPP
+  police 8000000 conform-action transmit exceed-action transmit
+ class CM-ISP-MGMT-COPP
+  police 1000000 conform-action transmit exceed-action drop
+ class CM-ISP-SNMP-COPP
+  police 256000 conform-action transmit exceed-action drop
+ class CM-ISP-ICMP-COPP
+  police 512000 conform-action transmit exceed-action drop
+ class class-default
+  police 256000 conform-action transmit exceed-action drop
+exit
+
+control-plane
+ service-policy input PM-ISP-COPP
+exit
+
+ip cef
+class-map match-any VOICE_RTP
+ match protocol rtp audio
+ exit
+class-map match-any VOICE_SIGNAL
+ match protocol sip
+ exit
+policy-map GLOBAL_QOS_POLICY
+ class VOICE_RTP
+  priority percent 30
+  set ip dscp ef
+  exit
+ class VOICE_SIGNAL
+  bandwidth percent 10
+  set ip dscp cs3
+  exit
+ class class-default
+  fair-queue
+  exit
+ exit
+
+interface s2/1
+ ip nbar protocol-discovery
+ service-policy output GLOBAL_QOS_POLICY
+ exit
+interface s2/0
+ ip nbar protocol-discovery
+ service-policy output GLOBAL_QOS_POLICY
+ exit
+
+
+

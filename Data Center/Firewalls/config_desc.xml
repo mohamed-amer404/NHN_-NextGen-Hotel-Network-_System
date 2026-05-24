@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!-- DONT EDIT. AUTOMATICALLY GENERATED. -->
+<fm_config version="1.0" name="fortimail">
+	<buildinfo>
+		<version_major>7</version_major>
+		<version_minor>6</version_minor>
+		<custom_number>FW</custom_number>
+		<build_number>0729</build_number>
+		<branch_point>729</branch_point>
+		<patch_number>1</patch_number>
+		<device_model>FEVMKV</device_model>
+	</buildinfo>
+	<config name="user_conf">
+		<domain name="system">
+			<item name="ibe_data" type="system"/>
+		</domain>
+	</config>
+</fm_config>

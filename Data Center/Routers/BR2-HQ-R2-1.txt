@@ -1,0 +1,173 @@
+BR2-HQ-R2
+
+enable
+configure terminal
+
+
+hostname BR2-HQ-R2
+
+service password-encryption
+
+enable secret NHN123
+banner motd #WARNING: Authorized users only!#
+banner login #Access restricted to IT staff only.#
+banner exec #Welcome to NextGen Hotel Network Switch#
+
+ip domain-name NHN.local
+
+username Abdelraheem privilege 15 secret NHN123
+username Arafa privilege 15 secret NHN123
+username Ahmed privilege 15 secret NHN123
+username Amer privilege 15 secret NHN123
+username Menna privilege 15 secret NHN123
+username Hussein privilege 15 secret NHN123
+username hashem privilege 15 secret NHN123
+username Abdullah privilege 15 secret NHN123
+username Ezzat privilege 5 secret NHN123
+crypto key generate rsa modulus 2048
+
+ip ssh version 2
+ip ssh time-out 60
+ip ssh authentication-retries 3
+
+line vty 0 4
+ login local
+ transport input ssh
+ exec-timeout 10 0
+
+exit
+
+line console 0
+login
+password NHN123
+exit
+
+
+
+interface e0/0
+ ip address 203.0.113.29 255.255.255.252
+ no shutdown
+exit
+
+interface e0/1
+ ip address 203.0.113.65 255.255.255.248
+ no shutdown
+exit
+
+
+
+
+route-map OSPF-TO-BGP permit 10
+ set tag 10
+exit
+
+route-map FILTER-OSPF deny 10
+ match tag 10
+exit
+route-map FILTER-OSPF permit 20
+exit
+
+router ospf 1
+ router-id 15.15.15.15
+ network 203.0.113.64 0.0.0.7 area 0
+redistribute bgp 400 subnets route-map OSPF-TO-BGP metric 20 metric-type 2
+exit
+
+
+router bgp 400
+ bgp router-id 14.14.14.14
+ neighbor 203.0.113.30 remote-as 400
+ neighbor 203.0.113.30 next-hop-self
+ network 203.0.113.28 mask 255.255.255.252
+ bgp redistribute-internal
+ redistribute ospf 1 match internal external 1 external 2 route-map FILTER-OSPF
+ distance bgp 20 105 20
+exit
+
+service timestamps log datetime msec
+logging buffered 64000 debugging
+
+
+ip access-list extended ACL-MGMT-COPP
+ permit tcp 192.168.122.0 0.0.0.255 any eq 22
+exit
+
+
+ip access-list extended ACL-SNMP-COPP
+ permit udp 192.168.122.0 0.0.0.255 any eq snmp
+exit
+
+ip access-list extended ACL-ROUTING-COPP
+ permit ospf any any
+ permit tcp any any eq bgp
+ permit tcp any eq bgp any
+exit
+
+ip access-list extended ACL-ICMP-COPP
+ permit icmp any any
+exit
+
+class-map match-all CM-ROUTING-COPP
+ match access-group name ACL-ROUTING-COPP
+exit
+
+class-map match-all CM-MGMT-COPP
+ match access-group name ACL-MGMT-COPP
+exit
+
+class-map match-all CM-SNMP-COPP
+ match access-group name ACL-SNMP-COPP
+exit
+
+class-map match-all CM-ICMP-COPP
+ match access-group name ACL-ICMP-COPP
+exit
+
+policy-map PM-COPP
+ class CM-ROUTING-COPP
+  
+  police 8000000 conform-action transmit exceed-action transmit
+ class CM-MGMT-COPP
+  
+  police 1000000 conform-action transmit exceed-action drop
+ class CM-SNMP-COPP
+  
+  police 256000 conform-action transmit exceed-action drop
+ class CM-ICMP-COPP
+  
+  police 512000 conform-action transmit exceed-action drop
+ class class-default
+ 
+  police 256000 conform-action transmit exceed-action drop
+exit
+
+control-plane
+ service-policy input PM-COPP
+exit
+
+
+ip cef
+class-map match-any VOICE_RTP
+ match protocol rtp audio
+ exit
+class-map match-any VOICE_SIGNAL
+ match protocol sip
+ exit
+policy-map GLOBAL_QOS_POLICY
+ class VOICE_RTP
+  priority percent 30
+  set ip dscp ef
+  exit
+ class VOICE_SIGNAL
+  bandwidth percent 10
+  set ip dscp cs3
+  exit
+ class class-default
+  fair-queue
+  exit
+ exit
+
+interface e0/0
+ ip nbar protocol-discovery
+ service-policy output GLOBAL_QOS_POLICY
+ exit
